@@ -5,7 +5,6 @@
 <p align="center">
   <a href="https://openddi.readthedocs.io/en/latest/">Docs</a> •
   <a href="#quick-start">Quick Start</a> •
-  <a href="#references">References</a>
 </p>
 
 # OpenDrug
