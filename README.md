@@ -2,7 +2,7 @@
 
 ## <span id="quick-start">🚀 Quick Start</span>
 
-Follow these steps to get started with OpenDDI:
+Follow these steps to get started with OpenDrug:
 
 ### **Step 1: Clone the Repository**
 
