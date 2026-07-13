@@ -44,14 +44,14 @@ napoleon_use_rtype = True
 # which docutils otherwise treats as undefined substitution references.  Defining
 # them here keeps the documentation build green without having to edit every
 # source file's docstring.
-rst_prolog = """
-.. |z1 - z2|      replace:: |z1| − |z2|
-.. |emb1 - emb2|  replace:: |emb1| − |emb2|
-.. |x_i - x_j|    replace:: |x_i| − |x_j|
-.. |p1 - p2|      replace:: |p1| − |p2|
-.. |proj1 - proj2| replace:: |proj1| − |proj2|
-.. |z_dif|        replace:: z_dif
-.. |z_mul|        replace:: z_mul
+rst_prolog = r"""
+.. |z1 - z2|       replace:: :math:`|z_1| - |z_2|`
+.. |emb1 - emb2|   replace:: :math:`|\text{emb}_1| - |\text{emb}_2|`
+.. |x_i - x_j|     replace:: :math:`|x_i| - |x_j|`
+.. |p1 - p2|       replace:: :math:`|p_1| - |p_2|`
+.. |proj1 - proj2| replace:: :math:`|\text{proj}_1| - |\text{proj}_2|`
+.. |z_dif|         replace:: z_dif
+.. |z_mul|         replace:: z_mul
 """
 
 # Treat auto-generated API summaries as documentation pages (allow building
