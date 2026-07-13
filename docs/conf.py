@@ -1,0 +1,197 @@
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+# =============================================================================
+# Project information
+# =============================================================================
+project = 'OpenDrug'
+copyright = '2024–2026, OpenDrug Contributors'
+author = 'OpenDrug Contributors'
+release = '0.1.0'
+version = '0.1'
+
+# =============================================================================
+# General configuration
+# =============================================================================
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../opendrug'))
+
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.doctest',
+    'sphinx_autodoc_typehints',
+    'sphinx_copybutton',
+    'myst_parser',
+] 
+
+# Napoleon settings (NumPy-style docstrings)
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
+napoleon_include_init_with_doc = True
+napoleon_include_private_with_doc = False
+napoleon_use_param = True
+napoleon_use_rtype = True
+
+# Stub out the custom substitution references used inside model docstrings.
+# These are short mathematical expressions written with bare pipes (e.g. "|z1 - z2|")
+# which docutils otherwise treats as undefined substitution references.  Defining
+# them here keeps the documentation build green without having to edit every
+# source file's docstring.
+rst_prolog = """
+.. |z1 - z2|      replace:: |z1| − |z2|
+.. |emb1 - emb2|  replace:: |emb1| − |emb2|
+.. |x_i - x_j|    replace:: |x_i| − |x_j|
+.. |p1 - p2|      replace:: |p1| − |p2|
+.. |proj1 - proj2| replace:: |proj1| − |proj2|
+.. |z_dif|        replace:: z_dif
+.. |z_mul|        replace:: z_mul
+"""
+
+# Treat auto-generated API summaries as documentation pages (allow building
+# without manual generated/ stubs in the repository).
+# autosummary_generate is intentionally left at the default (False) so that the
+# build does not modify the working tree on CI; the repository's pre-generated
+# stubs in docs/api/generated/ are committed.
+# autosummary_generate = True
+
+# Intersphinx mapping
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'torch':  ('https://pytorch.org/docs/stable', None),
+    'numpy':  ('https://numpy.org/devdocs', None),
+    'sklearn': ('https://scikit-learn.org/stable', None),
+}
+
+# Auto settings
+# Mock modules that the framework imports but are not installed in our
+# documentation environment.  Sphinx will treat them as empty placeholders so
+# autodoc / autosummary can still parse class / function signatures without
+# executing the modules.
+autodoc_mock_imports = [
+    'torch',
+    'torch.nn',
+    'torch.nn.functional',
+    'torch.cuda',
+    'torch.cuda.amp',
+    'torch.optim',
+    'torch.utils.data',
+    'torch_geometric',
+    'torch_geometric.data',
+    'torch_geometric.nn',
+    'torch_scatter',
+    'torch_sparse',
+    'dgl',
+    'dgl.nn',
+    'dgl.function',
+    'rdkit',
+    'rdkit.Chem',
+    'rdkit.Chem.AllChem',
+    'rdkit.Chem.rdchem',
+    'subword_nmt',
+    'subword_nmt.apply_bpe',
+    'gensim',
+    'matplotlib',
+    'matplotlib.pyplot',
+    'sklearn',
+    'sklearn.metrics',
+    'tqdm',
+    'numpy',
+    'scipy',
+    'scipy.stats',
+    'pandas',
+    'networkx',
+    'yaml',
+    'logging',
+]
+
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'undoc-members': False,
+    'show-inheritance': True,
+}
+autodoc_typehints = 'description'
+autodoc_typehints_format = 'short'
+
+# Add paths to make your Python module visible to Sphinx
+# (relative to this file, i.e. docs/)
+sys.path.insert(0, os.path.abspath('../opendrug'))
+
+# =============================================================================
+# Options for HTML output
+# =============================================================================
+html_theme = 'sphinx_rtd_theme'
+html_theme_options = {
+    'canonical_url': '',
+    'analytics_id': '',
+    'logo_only': False,
+    'display_version': True,
+    'prev_next_buttons_location': 'bottom',
+    'style_external_links': False,
+    'vcs_pageview_mode': '',
+    'style_nav_header_background': '#2c3e50',
+    'collapse_navigation': True,
+    'sticky_navigation': True,
+    'navigation_depth': 4,
+    'includehidden': True,
+    'titles_only': False,
+}
+
+# Static files
+html_static_path = ['_static']
+html_css_files = ['custom.css']
+# html_favicon = '_static/favicon.ico'  # uncomment after adding a favicon
+
+# =============================================================================
+# Options for LaTeX / PDF output
+# =============================================================================
+latex_elements = {
+    'papersize': 'a4paper',
+    'pointsize': '11pt',
+    'preamble': (
+        r'\usepackage{amsmath,amssymb}'
+        r'\usepackage{booktabs}'
+        r'\usepackage{makecell}'
+    ),
+}
+latex_documents = [
+    (('index'), 'opendrug.tex'), 'OpenDrug Documentation', 'OpenDrug Contributors',
+]
+
+# =============================================================================
+# Source suffix
+# =============================================================================
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+myst_enable_extensions = [
+    'colon_fence',
+    'deflist',
+    'dollarmath',
+    'fieldlist',
+    'html_admonition',
+    'html_image',
+    'linkify',
+    'strikethrough',
+    'substitution',
+    'tasklist',
+] 
+myst_heading_anchors = 3
+
+# =============================================================================
+# Exclude patterns
+# =============================================================================
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+# =============================================================================
+# Todo / experimental feature flags (shown with toggle)
+# =============================================================================
+todo_include_todos = True
