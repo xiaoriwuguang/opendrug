@@ -1,3 +1,13 @@
+<div align="center">
+  <img src="odlogo.png" alt="OpenDrug Logo" border="0" width="100%"/>
+</div>
+
+<p align="center">
+  <a href="https://openddi.readthedocs.io/en/latest/">Docs</a> •
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#references">References</a>
+</p>
+
 # OpenDrug
 
 ## <span id="quick-start">🚀 Quick Start</span>
