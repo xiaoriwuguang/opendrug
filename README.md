@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-  <a href="https://opendrug.readthedocs.io/en/latest/quickstart.html">Docs</a> •
+  <a href="https://opendrug.readthedocs.io/en/latest/">Docs</a> •
   <a href="#quick-start">Quick Start</a> •
 </p>
 
@@ -45,4 +45,4 @@ python -m opendrug.main --task dti --model DrugBAN --matrix BIOSNAP \
     --ban_heads 4
 ```
 
-See the full [Quickstart](https://opendrug.readthedocs.io/en/latest/quickstart.html) for more.
+See the full [Quickstart Example](https://opendrug.readthedocs.io/en/latest/) for more.
