@@ -1,4 +1,4 @@
-# OpenDDI
+# OpenDrug
 
 ## <span id="quick-start">🚀 Quick Start</span>
 
