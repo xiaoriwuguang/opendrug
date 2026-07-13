@@ -54,12 +54,11 @@ rst_prolog = r"""
 .. |z_mul|         replace:: z_mul
 """
 
-# Treat auto-generated API summaries as documentation pages (allow building
-# without manual generated/ stubs in the repository).
-# autosummary_generate is intentionally left at the default (False) so that the
-# build does not modify the working tree on CI; the repository's pre-generated
-# stubs in docs/api/generated/ are committed.
-# autosummary_generate = True
+# Treat auto-generated API summaries as documentation pages.
+# Set to True so Sphinx generates the stubs under docs/api/generated/ during
+# the build; the docs/conf.py serves as the single source of truth for this
+# flag so neither the CI workflow nor .readthedocs.yaml needs to override it.
+autosummary_generate = True
 
 # Intersphinx mapping
 intersphinx_mapping = {
@@ -75,12 +74,11 @@ intersphinx_mapping = {
 # autodoc / autosummary can still parse class / function signatures without
 # executing the modules.
 autodoc_mock_imports = [
-    # The top-level package itself must also be mocked: CI does not install
-    # the project (torch/sklearn make pip install -e . very slow), so Sphinx
-    # cannot import it.  Mocking it makes all sub-modules silently unavailable
-    # at import time, which is fine — the API reference pages are pre-generated
-    # stubs (docs/api/generated/) that do not need to import the real classes.
-    'opendrug',
+    # Third-party heavy dependencies that are not installed in the docs build
+    # environment.  Sphinx will treat them as empty placeholders so autodoc can
+    # still parse class / function signatures without executing the modules.
+    # NOTE: 'opendrug' itself is intentionally NOT mocked so that autodoc can
+    # introspect the real module hierarchy and generate API documentation.
     'torch',
     'torch.nn',
     'torch.nn.functional',
@@ -126,9 +124,7 @@ autodoc_default_options = {
 autodoc_typehints = 'description'
 autodoc_typehints_format = 'short'
 
-# Add paths to make your Python module visible to Sphinx
-# (relative to this file, i.e. docs/)
-sys.path.insert(0, os.path.abspath('../opendrug'))
+# sys.path was already set above.
 
 # =============================================================================
 # Options for HTML output

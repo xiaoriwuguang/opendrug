@@ -16,17 +16,11 @@ DDI models
    models/MVA
    models/DeepDDI
    models/DDKG
-   models/DSNDDI
    models/SumGNN
    models/PHGLDDI
    models/ExDDI
    models/CASTER
    models/MKGFENN
-   models/LaGAT
-   models/MMDGDTI
-   models/MIRACLE
-   models/ConvLSTM
-   models/ZeroDDI
 
 DTI / DTA / Cold-start models
 ----------------------------
