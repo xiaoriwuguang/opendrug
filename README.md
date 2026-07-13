@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="odlogo.png" alt="OpenDrug Logo" border="0" width="100%"/>
+  <img src="LOGO.png" alt="OpenDrug Logo" border="0" width="100%"/>
 </div>
 
 <p align="center">
