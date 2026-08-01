@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="OpenDrug: a unified, multimodal benchmark for drug–drug, drug–target and protein–protein interaction prediction, supporting 18 datasets, 7 tasks and 30 baseline models." />
+<meta name="keywords" content="OpenDrug, drug interaction benchmark, DDI, DTI, PPI, multimodal, heterogeneous graph, drug discovery, cold-start, robustness" />
+<meta name="theme-color" content="#0b1730" />
+<title>OpenDrug · A Unified Multimodal Benchmark for Drug-Related Interaction Prediction</title>
+
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<script defer src="assets/js/main.js"></script>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!--  TOP NAVIGATION                                               -->
+<!-- ============================================================ -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="#hero">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="28" height="28">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#5b8cff"/>
+            <stop offset="1" stop-color="#22d3ee"/>
+          </linearGradient>
+        </defs>
+        <circle cx="14" cy="14" r="6" fill="url(#g1)"/>
+        <circle cx="26" cy="26" r="6" fill="url(#g1)" opacity=".75"/>
+        <path d="M14 14 L26 26" stroke="#a7f3d0" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="26" cy="14" r="3" fill="#f472b6"/>
+        <circle cx="14" cy="26" r="3" fill="#facc15"/>
+      </svg>
+    </span>
+    <span class="brand-text">Open<span>Drug</span></span>
+  </a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="nav" id="nav">
+    <a href="#overview">Overview</a>
+    <a href="#datasets">Datasets</a>
+    <a href="#benchmark">Benchmark</a>
+    <a href="#robustness">Robustness</a>
+    <a href="#mechanism">Mechanism</a>
+    <a href="#cases">Cases</a>
+    <!-- <a href="#team">Team</a>
+    <a href="#citation">Citation</a> -->
+  </nav>
+</header>
+
+<!-- ============================================================ -->
+<!--  HERO                                                        -->
+<!-- ============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero-canvas" aria-hidden="true">
+    <canvas id="heroCanvas"></canvas>
+  </div>
+
+  <div class="hero-inner">
+    <p class="eyebrow">A Unified Multimodal Benchmark for Drug-Related Interaction Prediction</p>
+    <h1 class="title">
+      <span class="title-line">OpenDrug</span>
+      <span class="title-sub">Bridging Heterogeneous Bio-Interactions<br/>through a 5+3 Modality Lens</span>
+    </h1>
+
+    <p class="lead">
+      We curate <strong>10 representative methods for each of DDI, DTI and PPI</strong> under a single
+      evaluation protocol, ship <strong>18 datasets (7 newly organized)</strong> across <strong>7 downstream tasks</strong>,
+      and expose a <strong>5+3 modality</strong> alignment (5 drug, 3 protein). All of this is wired into
+      robust stress tests — cold start, label / topology / feature noise, and modality ablation —
+      so that progress in the field is measured against the same yardstick.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn primary" href="#overview">
+        <span>Explore the benchmark</span>
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <ul class="hero-stats" id="heroStats">
+      <li><span class="num" data-target="18">0</span><span class="lab">Datasets</span></li>
+      <li><span class="num" data-target="30">0</span><span class="lab">Baselines</span></li>
+      <li><span class="num" data-target="7">0</span><span class="lab">Tasks</span></li>
+      <li><span class="num" data-target="8">0</span><span class="lab">Modalities</span></li>
+      <li><span class="num" data-target="5">0</span><span class="lab">Stress Tests</span></li>
+    </ul>
+  </div>
+
+  <a class="scroll-cue" href="#overview" aria-label="Scroll to overview">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- ============================================================ -->
+<!--  OVERVIEW                                                    -->
+<!-- ============================================================ -->
+<section class="section" id="overview">
+  <header class="section-head">
+    <span class="section-tag">01 · Overview</span>
+    <h2>One framework, three interaction domains, eight modalities.</h2>
+    <p>
+      Modern pharmacology treats drug-related interactions — <em>Drug-Drug</em> (DDI),
+      <em>Drug-Target</em> (DTI) and <em>Protein-Protein</em> (PPI) — as a single connected ecosystem.
+      OpenDrug is the first benchmark that operationalises this view: a multimodal heterogeneous
+      knowledge graph, standardised splits, rigorous stress tests, and mechanistic interpretation.
+    </p>
+  </header>
+
+  <div class="overview-grid">
+    <article class="card span-2">
+      <h3>The three-stage pipeline</h3>
+      <ol class="stage-list">
+        <li>
+          <span class="stage-num">A</span>
+          <div>
+            <h4>Heterogeneous graph construction</h4>
+            <p>Drug and protein nodes are embedded with a <strong>5+3 modality</strong> alignment (SMILES, 2D graph, 3D conformer, text and pathway for drugs; sequence, text and 3D structure for proteins) and linked by DDI, DTI and PPI edges.</p>
+          </div>
+        </li>
+        <li>
+          <span class="stage-num">B</span>
+          <div>
+            <h4>Multi-task benchmarking</h4>
+            <p>30 representative baselines are profiled across 7 task types: binary / multi-class / multi-label classification and affinity regression. Efficiency profiling (time, memory) ships in the same harness.</p>
+          </div>
+        </li>
+        <li>
+          <span class="stage-num">C</span>
+          <div>
+            <h4>Biomedical insight extraction</h4>
+            <p>Cold-start, label / topology / feature noise, and modality-ablation stress tests quantify robustness. Attention-based subgraph mining then traces predictions back to mechanistic rationales.</p>
+          </div>
+        </li>
+      </ol>
+    </article>
+
+    <article class="card">
+      <h3>5 + 3 modalities</h3>
+      <div class="modality-grid">
+        <div class="mod drug"><span>SMILES</span></div>
+        <div class="mod drug"><span>KG Path</span></div>
+        <div class="mod drug"><span>3D</span></div>
+        <div class="mod drug"><span>Text</span></div>
+        <div class="mod drug"><span>Acid</span></div>
+        <div class="mod prot"><span>Sequence</span></div>
+        <div class="mod prot"><span>Text</span></div>
+        <div class="mod prot"><span>3D</span></div>
+      </div>
+      <p class="muted">Encoders: ChemBERTa-v2, Uni-Mol, ESM-2 (650M), ChemLLM-7B-Chat.</p>
+    </article>
+
+    <article class="card">
+      <h3>Tasks covered</h3>
+      <ul class="task-pills">
+        <li>DDI · Binary</li>
+        <li>DDI · Multi-class</li>
+        <li>DDI · Multi-label</li>
+        <li>DTI · Binary</li>
+        <li>DTA · Regression</li>
+        <li>PPI · Binary</li>
+        <li>PPI · Multi-label</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>Stress tests</h3>
+      <ul class="stress-list">
+        <li><span class="dot dot-1"></span> Cold-start (drug / protein / blind)</li>
+        <li><span class="dot dot-2"></span> Label noise (0 → 0.8)</li>
+        <li><span class="dot dot-3"></span> Topology noise (edge drop)</li>
+        <li><span class="dot dot-4"></span> Feature noise injection</li>
+        <li><span class="dot dot-5"></span> Modality ablation</li>
+      </ul>
+    </article>
+  </div>
+</section>
+<!-- ============================================================ -->
+<!--  FRAMEWORK FIGURE                                            -->
+<!-- ============================================================ -->
+  <header class="section-head">
+    <h2>The OpenDrug framework at a glance.</h2>
+    <p>
+      Multimodal heterogeneous graph (A), multi-task benchmarking (B), robustness analysis (C),
+      interpretability via subgraph mining (D) and cognitive-boundary case studies (E).
+    </p>
+  </header>
+
+  <figure class="big-figure">
+    <img src="assets/figures/f1.jpg" alt="OpenDrug framework overview" title="OpenDrug framework overview" width="100%" style="display:block;">
+    <figcaption>Overall design and analytical modules of the OpenDrug framework.</figcaption>
+  </figure>
+
+<!-- ============================================================ -->
+<!--  DATASETS                                                    -->
+<!-- ============================================================ -->
+<section class="section dark" id="datasets">
+  <header class="section-head">
+    <span class="section-tag">02 · Datasets</span>
+    <h2>18 datasets, 7 newly curated, covering the full DDI / DTI / PPI landscape.</h2>
+    <p>
+      Each family ships with one in-house OpenDrug-curated split and complementary public benchmarks
+      re-formatted under the unified interface. Negative construction is task-aware: closed-world
+      random pairing for binary tasks, hard-negative STRING filtering for PPI, and per-target
+      standardisation for affinity regression.
+    </p>
+  </header>
+
+  <div class="dataset-controls">
+    <div class="tabs" role="tablist" aria-label="Filter datasets by task">
+      <button class="tab active" data-filter="all" role="tab">All</button>
+      <button class="tab" data-filter="ddi" role="tab">DDI</button>
+      <button class="tab" data-filter="dti" role="tab">DTI / DTA</button>
+      <button class="tab" data-filter="ppi" role="tab">PPI</button>
+    </div>
+    <label class="search-wrap">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="datasetSearch" type="search" placeholder="Search datasets (e.g. ChCh-Miner)…" />
+    </label>
+  </div>
+
+  <div class="table-wrap">
+    <table class="dataset-table" id="datasetTable">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Dataset</th>
+          <th>Source</th>
+          <th>Drugs</th>
+          <th>Proteins</th>
+          <th>Edges (pos)</th>
+          <th>Pos.%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- DDI Binary -->
+        <tr data-task="ddi"><td rowspan="2"><span class="chip ddi">DDI · Binary</span></td><td><strong>OpenDrug curated</strong> <span class="badge new">New</span></td><td>DrugBank 2024-01 + ChEMBL 33 + KEGG + BindingDB + PubChem</td><td>14,080</td><td>14,089</td><td>2,547,620</td><td>50.00</td></tr>
+        <tr data-task="ddi"><td>ChCh-Miner</td><td>BioSNAP / DrugBank 5.1.9</td><td>1,497</td><td>1,496</td><td>48,514</td><td>50.00</td></tr>
+        <!-- DDI Multiclass -->
+        <tr data-task="ddi"><td rowspan="4"><span class="chip ddi">DDI · Multi-class</span></td><td><strong>OpenDrug curated</strong> <span class="badge new">New</span></td><td>DrugBank + ChEMBL (filtered)</td><td>14,086</td><td>—</td><td>2,534,350</td><td>100.00</td></tr>
+        <tr data-task="ddi"><td>Ryus</td><td>DrugBank 5.0.3 (DeepDDI corpus)</td><td>1,706</td><td>—</td><td>191,570</td><td>100.00</td></tr>
+        <tr data-task="ddi"><td>Dengs</td><td>DrugBank 5.1.3 (DDIMDL corpus)</td><td>572</td><td>—</td><td>37,264</td><td>100.00</td></tr>
+        <tr data-task="ddi"><td>ZS-DDIE</td><td>DrugBank 5.1.7 + OL-DDI</td><td>2,004</td><td>—</td><td>394,118</td><td>100.00</td></tr>
+        <!-- DDI Multilabel -->
+        <tr data-task="ddi"><td rowspan="2"><span class="chip ddi">DDI · Multi-label</span></td><td><strong>OpenDrug curated</strong> <span class="badge new">New</span></td><td>DrugBank + Twosides union</td><td>6,704</td><td>—</td><td>211,951</td><td>~0.38</td></tr>
+        <tr data-task="ddi"><td>Twosides</td><td>Tatonetti Lab, 2024 refresh (nSIDEs)</td><td>645</td><td>—</td><td>19,535</td><td>~0.66</td></tr>
+        <!-- DTI Binary -->
+        <tr data-task="dti"><td rowspan="3"><span class="chip dti">DTI · Binary</span></td><td><strong>OpenDrug curated</strong> <span class="badge new">New</span></td><td>DrugBank 2024-01 + BindingDB + BioSNAP + Hetionet + Yamanishi_08</td><td>8,902</td><td>4,317</td><td>214,063</td><td>50.00</td></tr>
+        <tr data-task="dti"><td>BindingDB</td><td>BindingDB 2024-01</td><td>2,207</td><td>1,784</td><td>20,756</td><td>50.00</td></tr>
+        <tr data-task="dti"><td>BioSNAP</td><td>SNAP BioSNAP / DrugBank 5.1.9</td><td>4,213</td><td>2,166</td><td>25,357</td><td>50.00</td></tr>
+        <!-- DTA Regression -->
+        <tr data-task="dti"><td><span class="chip dti">DTA · Regression</span></td><td><strong>OpenDrug curated</strong> <span class="badge new">New</span></td><td>DrugBank + BindingDB + Davis + KIBA</td><td>12,408</td><td>3,861</td><td>346,612</td><td>continuous</td></tr>
+        <!-- PPI Binary -->
+        <tr data-task="ppi"><td rowspan="3"><span class="chip ppi">PPI · Binary</span></td><td><strong>OpenDrug curated</strong> <span class="badge new">New</span></td><td>STRING v12 + BioGRID 2024-04</td><td colspan="2">17,402 proteins</td><td>1,020,221</td><td>49.50</td></tr>
+        <tr data-task="ppi"><td>neurodegenerative_disease</td><td>NDAtlas v2022-09</td><td colspan="2">816 × 813</td><td>11,729</td><td>50.00</td></tr>
+        <tr data-task="ppi"><td>disease_of_metabolism</td><td>HuRI / STRING v12 (metabolic subset)</td><td colspan="2">1,024 × 1,019</td><td>10,239</td><td>50.00</td></tr>
+        <!-- PPI Multilabel -->
+        <tr data-task="ppi"><td rowspan="3"><span class="chip ppi">PPI · Multi-label</span></td><td><strong>OpenDrug curated</strong> <span class="badge new">New</span></td><td>STRING v12 + SHS27K / SHS148K</td><td colspan="2">17,402 proteins</td><td>215,101</td><td>~14.30</td></tr>
+        <tr data-task="ppi"><td>SHS27K</td><td>STRING v11 + UniProt 2021-06</td><td colspan="2">1,690 proteins</td><td>4,877</td><td>~14.30</td></tr>
+        <tr data-task="ppi"><td>SHS148K</td><td>STRING v11 + UniProt 2021-06</td><td colspan="2">5,189 proteins</td><td>26,559</td><td>~14.30</td></tr>
+      </tbody>
+    </table>
+    <p class="muted table-foot">Numbers are unique undirected positive edges prior to negative sampling. Curated splits add balanced 1:1 negatives on top.</p>
+  </div>
+
+  <figure class="big-figure">
+    <img src="assets/figures/f2.jpg" alt="OpenDrug datasets overview" title="OpenDrug datasets overview" width="100%" style="display:block;">
+    <figcaption>Dataset statistics and coverage across DDI, DTI, DTA and PPI tasks.</figcaption>
+  </figure>
+</section>
+
+<!-- ============================================================ -->
+<!--  BENCHMARK                                                   -->
+<!-- ============================================================ -->
+<section class="section" id="benchmark">
+  <header class="section-head">
+    <span class="section-tag">03 · Benchmark</span>
+    <h2>30 representative baselines evaluated on identical splits.</h2>
+    <p>
+      We re-implemented every baseline under one ecosystem so that numbers are comparable.
+      Per-task best performers, mean wall-clock, peak memory and accuracy / F1 / R² are
+      consolidated into a single leaderboard snapshot.
+    </p>
+  </header>
+
+  <div class="leaderboard">
+    <div class="lb-card">
+      <div class="lb-head"><h3>DDI · Binary · Accuracy</h3><span class="muted">OpenDrug curated</span></div>
+      <ol class="lb-list">
+        <li><span class="rank gold">1</span><span class="name">GoGNN</span><span class="bar"><span style="width:96%"></span></span><span class="score">0.961</span></li>
+        <li><span class="rank silver">2</span><span class="name">MKG-FENN</span><span class="bar"><span style="width:93%"></span></span><span class="score">0.948</span></li>
+        <li><span class="rank bronze">3</span><span class="name">MRCGNN</span><span class="bar"><span style="width:91%"></span></span><span class="score">0.939</span></li>
+        <li><span class="rank">4</span><span class="name">CASTER</span><span class="bar"><span style="width:88%"></span></span><span class="score">0.928</span></li>
+        <li><span class="rank">5</span><span class="name">PHGL-DDI</span><span class="bar"><span style="width:86%"></span></span><span class="score">0.915</span></li>
+      </ol>
+    </div>
+
+    <div class="lb-card">
+      <div class="lb-head"><h3>DTI · Binary · Accuracy</h3><span class="muted">BindingDB</span></div>
+      <ol class="lb-list">
+        <li><span class="rank gold">1</span><span class="name">ColdstartCPI</span><span class="bar"><span style="width:95%"></span></span><span class="score">0.927</span></li>
+        <li><span class="rank silver">2</span><span class="name">DrugBAN</span><span class="bar"><span style="width:91%"></span></span><span class="score">0.902</span></li>
+        <li><span class="rank bronze">3</span><span class="name">EviDTI</span><span class="bar"><span style="width:89%"></span></span><span class="score">0.891</span></li>
+        <li><span class="rank">4</span><span class="name">DTIAM</span><span class="bar"><span style="width:85%"></span></span><span class="score">0.872</span></li>
+        <li><span class="rank">5</span><span class="name">MMD-DTA</span><span class="bar"><span style="width:82%"></span></span><span class="score">0.860</span></li>
+      </ol>
+    </div>
+
+    <div class="lb-card">
+      <div class="lb-head"><h3>DTA · Regression · R²</h3><span class="muted">Davis / KIBA blend</span></div>
+      <ol class="lb-list">
+        <li><span class="rank gold">1</span><span class="name">MGraphDTA</span><span class="bar"><span style="width:97%"></span></span><span class="score">0.881</span></li>
+        <li><span class="rank silver">2</span><span class="name">MMD-DTA</span><span class="bar"><span style="width:93%"></span></span><span class="score">0.864</span></li>
+        <li><span class="rank bronze">3</span><span class="name">AdaMBind</span><span class="bar"><span style="width:89%"></span></span><span class="score">0.842</span></li>
+        <li><span class="rank">4</span><span class="name">GraphDTA</span><span class="bar"><span style="width:84%"></span></span><span class="score">0.819</span></li>
+        <li><span class="rank">5</span><span class="name">DrugBAN</span><span class="bar"><span style="width:79%"></span></span><span class="score">0.795</span></li>
+      </ol>
+    </div>
+
+    <div class="lb-card">
+      <div class="lb-head"><h3>PPI · Binary · Accuracy</h3><span class="muted">STRING v12 subset</span></div>
+      <ol class="lb-list">
+        <li><span class="rank gold">1</span><span class="name">MAPE-PPI</span><span class="bar"><span style="width:98%"></span></span><span class="score">0.973</span></li>
+        <li><span class="rank silver">2</span><span class="name">HIGH-PPI</span><span class="bar"><span style="width:94%"></span></span><span class="score">0.954</span></li>
+        <li><span class="rank bronze">3</span><span class="name">D-SCRIPT</span><span class="bar"><span style="width:90%"></span></span><span class="score">0.931</span></li>
+        <li><span class="rank">4</span><span class="name">TUnA</span><span class="bar"><span style="width:87%"></span></span><span class="score">0.918</span></li>
+        <li><span class="rank">5</span><span class="name">CollaPPI</span><span class="bar"><span style="width:84%"></span></span><span class="score">0.902</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <figure class="big-figure">
+    <img src="assets/figures/f3.jpg" alt="OpenDrug benchmark results across DDI, DTI, DTA and PPI" title="OpenDrug benchmark results across DDI, DTI, DTA and PPI" width="100%" style="display:block;">
+    <figcaption>Detailed performance profiling across DDI, DTI, DTA and PPI tasks. The complete panel includes accuracy / F1 / R², runtime and memory matrices, and the radar summary.</figcaption>
+  </figure>
+</section>
+
+<!-- ============================================================ -->
+<!--  ROBUSTNESS                                                  -->
+<!-- ============================================================ -->
+<section class="section dark" id="robustness">
+  <header class="section-head">
+    <span class="section-tag">04 · Robustness</span>
+    <h2>Stringent stress tests expose the memorisation bottleneck.</h2>
+    <p>
+      Real drug discovery is full of unseen drugs, sparse modalities and noisy experimental data.
+      OpenDrug profiles every baseline under cold-start (drug / protein / blind), label noise,
+      topology noise, feature noise and modality ablation.
+    </p>
+  </header>
+
+  <div class="robust-grid">
+    <div class="metric-card">
+      <div class="metric-num">−25<span>%</span></div>
+      <p>Performance drop observed across SOTA models under <strong>cold-start scenarios</strong>, exposing a pervasive memorisation bottleneck.</p>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">+5 to 20<span>%</span></div>
+      <p>Consistent performance gains from <strong>comprehensive multimodal alignment</strong>, mathematically validating the 5+3 design.</p>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">0 → 0.8</div>
+      <p>Label and topology noise sweeps reveal a clear robustness hierarchy: ColdstartCPI stays stable while MKG-FENN collapses under heavy edge drop.</p>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">5 stress tests</div>
+      <p>Cold-start · label noise · topology noise · feature noise · modality ablation — all reproducible from the released seeds.</p>
+    </div>
+  </div>
+
+  <figure class="big-figure">
+    <img src="assets/figures/f4.jpg" alt="OpenDrug robustness analysis" title="OpenDrug robustness analysis" width="100%" style="display:block;">
+    <figcaption>Cold-start, label noise, topology noise, ridge plots and modality-ablation studies together quantify each model's resilience.</figcaption>
+  </figure>
+</section>
+
+<!-- ============================================================ -->
+<!--  MECHANISM                                                   -->
+<!-- ============================================================ -->
+<section class="section" id="mechanism">
+  <header class="section-head">
+    <span class="section-tag">05 · Mechanism</span>
+    <h2>From graph topology to molecular rationale.</h2>
+    <p>
+      Attention-based subgraph mining reverses high-confidence predictions back to clinically
+      recognisable mechanisms. Three case studies illustrate the translation from graph
+      language to pharmacological language.
+    </p>
+  </header>
+
+  <div class="case-grid">
+    <article class="case-card">
+      <span class="case-tag ddi">DDI</span>
+      <h3>CYP3A4 target competition</h3>
+      <p>Simvastatin and Ketoconazole both dock into the CYP3A4 catalytic site. The model recovers this polypharmacy clash and flags rhabdomyolysis risk — a textbook adverse drug reaction.</p>
+      <ul class="case-facts">
+        <li><strong>Drugs:</strong> Simvastatin · Ketoconazole</li>
+        <li><strong>Enzyme:</strong> CYP3A4</li>
+        <li><strong>Outcome:</strong> Rhabdomyolysis &amp; acute renal failure</li>
+      </ul>
+    </article>
+    <article class="case-card">
+      <span class="case-tag dti">DTI</span>
+      <h3>PDE5 / PDE6 cross-reactivity</h3>
+      <p>Sildenafil was designed for PDE5 but also binds PDE6 due to near-identical binding pockets. The subgraph ranks the off-target edge as highly attended — matching the cyanopsia side effect seen in the clinic.</p>
+      <ul class="case-facts">
+        <li><strong>Drug:</strong> Sildenafil</li>
+        <li><strong>Targets:</strong> PDE5 (intended) · PDE6 (off-target)</li>
+        <li><strong>Outcome:</strong> Transient cyanopsia</li>
+      </ul>
+    </article>
+    <article class="case-card">
+      <span class="case-tag ppi">PPI</span>
+      <h3>Hsp90–Cdc37–CDK4 chaperone network</h3>
+      <p>CDK4 maturation is inefficient without the co-chaperone Cdc37, which scans and docks the kinase onto Hsp90. The mined subgraph reproduces this classical assembly pathway with high-attention weights on all three nodes.</p>
+      <ul class="case-facts">
+        <li><strong>Chaperone:</strong> Hsp90 · Cdc37</li>
+        <li><strong>Client kinase:</strong> CDK4</li>
+        <li><strong>Outcome:</strong> Oncogenic kinase maturation</li>
+      </ul>
+    </article>
+  </div>
+
+  <figure class="big-figure">
+    <img src="assets/figures/f5.jpg" alt="OpenDrug interpretability via subgraph mining" title="OpenDrug interpretability via subgraph mining" width="100%" style="display:block;">
+    <figcaption>Subgraph extraction highlights 28,140 key proteins and 42,530 key drugs that drive high-confidence predictions.</figcaption>
+  </figure>
+</section>
+
+<!-- ============================================================ -->
+<!--  COGNITIVE BOUNDARY CASES                                    -->
+<!-- ============================================================ -->
+<section class="section dark" id="cases">
+  <header class="section-head">
+    <span class="section-tag">06 · Cognitive boundaries</span>
+    <h2>Where current models collectively fail.</h2>
+    <p>
+      Through in-depth error analysis we identified three absolute failure domains that span
+      2D-based and sequence-based architectures. These are the open challenges for the next
+      generation of drug-interaction models.
+    </p>
+  </header>
+
+  <div class="boundary-grid">
+    <article class="boundary-card">
+      <span class="b-tag ddi">DDI · Chirality</span>
+      <h3>Thalidomide enantiomers</h3>
+      <p>Both enantiomers share identical 2D graphs. Only the S-enantiomer fits the CRBN hydrophobic tripod pocket, yet 2D GNNs treat them as indistinguishable.</p>
+    </article>
+    <article class="boundary-card">
+      <span class="b-tag dti">DTI · Mutations</span>
+      <h3>BCR-ABL · T315I resistance</h3>
+      <p>A single gatekeeper mutation (Thr→Ile) introduces steric clash that evicts Imatinib from the ATP pocket. Sequence models cannot model this 3D deformation.</p>
+    </article>
+    <article class="boundary-card">
+      <span class="b-tag ppi">PPI · IDP interfaces</span>
+      <h3>p53–MDM2 plug-and-socket</h3>
+      <p>Three hotspot residues (Phe19, Trp23, Leu26) plug into MDM2's hydrophobic groove. Flat macromolecular interfaces defeat models relying on global homology.</p>
+    </article>
+  </div>
+
+  <figure class="big-figure">
+    <img src="assets/figures/f6.jpg" alt="OpenDrug case study analysis" title="OpenDrug case study analysis" width="100%" style="display:block;">
+    <figcaption>UpSet plots of model failures across stereoisomer recognition, single-point mutation resistance and complex PPI interfaces.</figcaption>
+  </figure>
+
+  <aside class="callout">
+    <h3>Call to action</h3>
+    <p>To resolve chirality, steric clashing and allosteric regulation, future drug-interaction models must move from <strong>static 2D heterogeneous graphs to 3D geometric deep learning</strong>, integrating dynamic conformational knowledge from multimodal structural biology.</p>
+  </aside>
+</section>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="brand-text small">Open<span>Drug</span></span>
+      <p>A unified multimodal benchmark for drug-related interaction prediction.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#overview">Overview</a>
+      <a href="#datasets">Datasets</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#robustness">Robustness</a>
+      <a href="#mechanism">Mechanism</a>
+      <a href="#cases">Cases</a>
+    </div>
+    <div class="footer-right">
+      <p><a href="https://github.com/xiaoriwuguang/opendrug" target="_blank" rel="noopener">Code</a> · Data · Paper — coming soon</p>
+      <p class="muted">© 2026 OpenDrug Working Group</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
