@@ -5,7 +5,7 @@
 <p align="center">
   <a href="https://opendrug.readthedocs.io/en/latest/">Docs</a> •
   <a href="#quick-start">Quick Start</a> •
-   <a href="https://xiaoriwuguang.github.io/OpenDrugweb/">web</a> •
+   <a href="https://xiaoriwuguang.github.io/OpenDrugweb/">Web</a> •
 </p>
 
 # OpenDrug
